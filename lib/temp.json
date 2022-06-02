@@ -1,0 +1,66 @@
+{
+    "users": [
+        {
+            "Xbnu0uH4Zea2p0CeaE8R4cvHek73": {
+                "displayName": "Test Account",
+                "email": "test@experience.com",
+                "collections": [
+                    {
+                        "id": "uuid4_1",
+                        "title": "Collection Title",
+                        "image": "referenceToImageInFirebaseStorage",
+                        "experiences": [
+                            {
+                                "id": "uuid4_1_1",
+                                "title": "Experience1",
+                                "image": "referenceToImageInFirebaseStorage2",
+                                "description": "description",
+                                "location": "location",
+                                "date": "date"
+                            },
+                            {
+                                "id": "uuid4_1_2",
+                                "title": "Experience2",
+                                "image": "referenceToImageInFirebaseStorage2",
+                                "description": "description",
+                                "location": "location",
+                                "date": "date"
+                            }
+                        ]
+                    }
+                ] 
+            }
+        },
+        {
+            "vLMDEpVFgoRlBNUTuguNTbVktxn2": {
+                "displayName": "Admin Account",
+                "email": "admin@experience.com",
+                "collections": [
+                    {
+                        "id": "uuid4_2",
+                        "title": "Collection Title",
+                        "image": "referenceToImageInFirebaseStorage",
+                        "experiences": [
+                            {
+                                "id": "uuid4_2_1",
+                                "title": "Experience1",
+                                "image": "referenceToImageInFirebaseStorage2",
+                                "description": "description",
+                                "location": "location",
+                                "date": "date"
+                            },
+                            {
+                                "id": "uuid4_2_2",
+                                "title": "Experience2",
+                                "image": "referenceToImageInFirebaseStorage2",
+                                "description": "description",
+                                "location": "location",
+                                "date": "date"
+                            }
+                        ]
+                    }
+                ] 
+            }
+        }
+    ]
+}
