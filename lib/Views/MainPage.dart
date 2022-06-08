@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
     Scaffold widgetToLoad;
 
     if (_selectedIndex == 0) {
-      widgetToLoad = getCollectionPage();
+      widgetToLoad = getCollectionPage(context);
     } else {
       widgetToLoad = getProfilePage();
     }

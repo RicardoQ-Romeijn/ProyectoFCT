@@ -43,6 +43,10 @@ class _ExperienceListState extends State<ExperienceList> {
               );
             },
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.add),
+          ),
         ));
   }
 }

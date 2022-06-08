@@ -25,5 +25,9 @@ class Collections {
     }
   }
 
+  String convertObj() {
+    return '{id: $id, title: $title, image: $image, experiences: $experiences}';
+  }
+
   get name => null;
 }
