@@ -17,13 +17,16 @@ class FrontExperience extends StatelessWidget {
           alignment: Alignment.center,
           child: Stack(
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(image),
-                  ),
-                ),
+              Image.network(
+                image,
+                errorBuilder: (BuildContext context, Object exception,
+                    StackTrace? stackTrace) {
+                  return const Icon(
+                    Icons.error,
+                    color: Color.fromRGBO(0, 0, 0, .3),
+                    size: 100,
+                  );
+                },
               ),
               Positioned(
                 right: 10,
@@ -68,14 +71,17 @@ class InnerExperience extends StatelessWidget {
           child: Stack(
             children: [
               Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      image: NetworkImage(experience.image),
-                    ),
-                  ),
+                alignment: Alignment.center,
+                child: Image.network(
+                  experience.image,
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return const Icon(
+                      Icons.error,
+                      color: Color.fromRGBO(0, 0, 0, .3),
+                      size: 100,
+                    );
+                  },
                 ),
               ),
               Column(

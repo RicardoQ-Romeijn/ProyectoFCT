@@ -124,15 +124,30 @@ class _CollectionListState extends State<CollectionList> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(collections[index].image),
-                                ),
+                            child: Center(
+                              child: Image.network(
+                                collections[index].image,
+                                errorBuilder: (BuildContext context,
+                                    Object exception, StackTrace? stackTrace) {
+                                  return const Icon(
+                                    Icons.error,
+                                    color: Color.fromRGBO(0, 0, 0, .3),
+                                    size: 100,
+                                  );
+                                },
                               ),
                             ),
                           ),
+                          //   Expanded(
+                          //     child: Container(
+                          //       decoration: BoxDecoration(
+                          //         image: DecorationImage(
+                          //           fit: BoxFit.cover,
+                          //           image: NetworkImage(collections[index].image),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
                           Text(collections[index].title)
                         ],
                       ),
