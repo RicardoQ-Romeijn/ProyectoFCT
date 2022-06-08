@@ -44,6 +44,8 @@ dependencies:
   google_fonts: ^3.0.1
   folding_cell: "^1.0.2"
   uuid: ^3.0.6
+  geolocator: ^8.2.1
+  geocoding: ^2.0.4
 
 dev_dependencies:
   flutter_test:

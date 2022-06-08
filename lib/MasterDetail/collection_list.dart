@@ -20,7 +20,7 @@ import 'dart:convert';
 //       'https://www.schengenvisainfo.com/news/wp-content/uploads/2020/06/Amsterdam-Netherlands.jpg',
 //       'Water Canal',
 //       'Canal with nice trees and boats',
-//       'Amsterdam',
+//       '52.3740300, 4.8896900',
 //       "22/04/2022"),
 //   Experiences(
 //       '2',
@@ -79,9 +79,8 @@ class _CollectionListState extends State<CollectionList> {
               if (user.uid == element.id) {
                 for (var element in element.get('collections')) {
                   var col = Collections(
-                    element['id'].toString(),
-                    element['image'].toString(),
                     element['title'].toString(),
+                    element['image'].toString(),
                   );
                   col.addExperiences(element['experiences']);
                   collections.add(col);

@@ -48,31 +48,32 @@ Scaffold getCollectionPage(BuildContext context) {
                   ElevatedButton(
                     child: Text("Create"),
                     onPressed: () {
+                      Collections newCol = Collections(
+                        titleController.value.text.trim(),
+                        imageController.value.text.trim(),
+                      );
+
+                      List<dynamic> col = [];
+
                       var snapshot = FirebaseFirestore.instance
                           .collection('users')
                           .doc(user.uid)
-                          .snapshots();
-                      snapshot.forEach((element) {
-                        List<dynamic> col = element
-                            .data()
-                            ?.putIfAbsent('collections', () => []);
-
-                        Collections newCol = Collections(
-                          Uuid().v4(),
-                          imageController.value.text.trim(),
-                          titleController.value.text.trim(),
-                        );
-
-                        col.add(newCol.convertObj());
-                        element.data()?.update('collections', (value) => col);
-
-                        // MapEntry<String, dynamic> map =
-                        //     MapEntry('collections', newCol.convertObj());
-                        // Iterable<MapEntry<String, dynamic>> iterable = [map];
-                        // element.data()!.addEntries(iterable);
-
-                        Navigator.pop(context, true);
-                      });
+                          .get()
+                          .then((value) => {
+                                col = value.get('collections'),
+                                col.add(newCol.convertObj()),
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(user.uid)
+                                    .update({'collections': col}).then(
+                                        (value) => {
+                                              print(
+                                                  "DocumentSnapshot successfully updated!"),
+                                              Navigator.pop(context, true)
+                                            },
+                                        onError: (e) => print(
+                                            "Error updating document $e")),
+                              });
                     },
                   )
                 ],

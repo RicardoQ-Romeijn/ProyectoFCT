@@ -1,9 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:html';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/MasterDetail/experience_card.dart';
 import 'package:flutter_application/Models/Experiences.dart';
+import 'package:flutter_application/Utils.dart';
 import 'package:folding_cell/folding_cell/widget.dart';
+
+final user = FirebaseAuth.instance.currentUser!;
 
 class ExperienceList extends StatefulWidget {
   final List<Experiences> experiences;
@@ -44,7 +51,88 @@ class _ExperienceListState extends State<ExperienceList> {
             },
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    final titleController = TextEditingController();
+                    final descriptionController = TextEditingController();
+                    final imageController = TextEditingController();
+                    return AlertDialog(
+                      scrollable: true,
+                      title: Text('New Experience'),
+                      content: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Form(
+                          child: Column(
+                            children: <Widget>[
+                              TextFormField(
+                                controller: titleController,
+                                decoration: InputDecoration(
+                                  labelText: 'Title',
+                                  icon: Icon(Icons.text_fields),
+                                ),
+                              ),
+                              TextFormField(
+                                controller: descriptionController,
+                                decoration: InputDecoration(
+                                  labelText: 'Description',
+                                  icon: Icon(Icons.text_fields),
+                                ),
+                              ),
+                              TextFormField(
+                                controller: imageController,
+                                decoration: InputDecoration(
+                                  labelText: 'Image',
+                                  icon: Icon(Icons.image),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          child: Text("Create"),
+                          onPressed: () {
+                            Experiences newExp = Experiences(
+                              titleController.value.text.trim(),
+                              descriptionController.value.text.trim(),
+                              imageController.value.text.trim(),
+                            );
+
+                            Utils.getGeoLocationPosition().then((value) => {
+                                  newExp.setLocation(
+                                      value.latitude, value.longitude),
+                                  //   print(newExp.convertObj())
+                                });
+
+                            var snapshot = FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(user.uid)
+                                .get();
+
+                            List<dynamic> collections = [];
+                            List<dynamic> experiences = [];
+
+                            snapshot.then(
+                              (value) => {
+                                collections = value.get('collections'),
+                                collections.forEach((element) {
+                                  if (element['title'] == collectionName) {
+                                    experiences = element['experiences'];
+                                    experiences.add(newExp.convertObj());
+                                    print(experiences);
+                                  }
+                                })
+                              },
+                            );
+                          },
+                        )
+                      ],
+                    );
+                  });
+            },
             child: const Icon(Icons.add),
           ),
         ));

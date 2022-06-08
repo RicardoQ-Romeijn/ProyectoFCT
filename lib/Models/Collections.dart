@@ -2,32 +2,39 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application/Models/Experiences.dart';
+import 'package:flutter_application/Utils.dart';
+import 'package:uuid/uuid.dart';
 
 class Collections {
-  Collections(this.id, this.image, this.title);
+  Collections(this.title, this.image);
 
-  String id;
+  String id = const Uuid().v4();
   String image;
   String title;
   List<Experiences> experiences = [];
 
   addExperiences(dynamic exps) {
     for (var element in exps) {
-      var exp = Experiences(
-        element['id'].toString(),
-        element['image'].toString(),
+      Experiences newExp = Experiences(
         element['title'].toString(),
         element['description'].toString(),
-        element['location'],
-        element['date'],
+        element['image'].toString(),
       );
-      this.experiences.add(exp);
+
+      Utils.getGeoLocationPosition().then((value) => {
+            newExp.setLocation(value.latitude, value.longitude),
+            experiences.add(newExp)
+            //   print(newExp.convertObj())
+          });
     }
   }
 
-  String convertObj() {
-    return '{id: $id, title: $title, image: $image, experiences: $experiences}';
+  dynamic convertObj() {
+    return {
+      'id': this.id,
+      'title': this.title,
+      'image': this.image,
+      'experiences': this.experiences
+    };
   }
-
-  get name => null;
 }
