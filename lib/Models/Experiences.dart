@@ -5,12 +5,13 @@ import 'package:uuid/uuid.dart';
 
 class Experiences {
   Experiences(
+    this.uuid,
     this.title,
     this.description,
     this.image,
   );
 
-  String id = const Uuid().v4();
+  String uuid;
   String image;
   String title;
   String description;
@@ -21,13 +22,21 @@ class Experiences {
     location = GeoPoint(latitude, longitude);
   }
 
+  setGeoLocation(GeoPoint location) {
+    location = location;
+  }
+
+  setTime(Timestamp date) {
+    date = date;
+  }
+
   dynamic convertObj() {
     return {
-      'id': id,
       'title': title,
+      'description': description,
       'image': image,
       'location': location,
-      'date': date
+      'date': date,
     };
   }
 }

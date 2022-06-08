@@ -11,5 +11,5 @@ class Users {
 
   String displayName;
   String email;
-  List<Collections> collections;
+  Map<String, Collections> collections;
 }

@@ -6,35 +6,29 @@ import 'package:flutter_application/Utils.dart';
 import 'package:uuid/uuid.dart';
 
 class Collections {
-  Collections(this.title, this.image);
+  Collections(this.uuid, this.title, this.image);
 
-  String id = const Uuid().v4();
+  String uuid;
   String image;
   String title;
-  List<Experiences> experiences = [];
+  Map<String, Experiences> experiences = {};
 
-  addExperiences(dynamic exps) {
-    for (var element in exps) {
+  addExperiences(Map<String, dynamic> exps) {
+    // print(exps);
+    exps.forEach((key, value) {
       Experiences newExp = Experiences(
-        element['title'].toString(),
-        element['description'].toString(),
-        element['image'].toString(),
+        key,
+        value['title'].toString(),
+        value['description'].toString(),
+        value['image'].toString(),
       );
-
-      Utils.getGeoLocationPosition().then((value) => {
-            newExp.setLocation(value.latitude, value.longitude),
-            experiences.add(newExp)
-            //   print(newExp.convertObj())
-          });
-    }
+      newExp.setGeoLocation(value['location']);
+      newExp.setTime(value['date']);
+      experiences.addEntries([MapEntry(key, newExp)]);
+    });
   }
 
   dynamic convertObj() {
-    return {
-      'id': this.id,
-      'title': this.title,
-      'image': this.image,
-      'experiences': this.experiences
-    };
+    return {'title': title, 'image': image, 'experiences': experiences};
   }
 }

@@ -4,10 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application/Login/LoginPage.dart';
+import 'package:flutter_application/Login/SignInPage.dart';
 
-final user = FirebaseAuth.instance.currentUser!;
+var user = FirebaseAuth.instance.currentUser!;
 
 Scaffold getProfilePage() {
+  user = FirebaseAuth.instance.currentUser!;
+
   return Scaffold(
     body: Column(
       children: [
@@ -27,12 +31,16 @@ Scaffold getProfilePage() {
               'Sign Out',
               style: TextStyle(fontSize: 24),
             ),
-            onPressed: () => FirebaseAuth.instance.signOut(),
+            onPressed: () => _signOut(),
           ),
         ),
       ],
     ),
   );
+}
+
+_signOut() async {
+  await FirebaseAuth.instance.signOut();
 }
 
 prettyText(String preText, String? postText) {

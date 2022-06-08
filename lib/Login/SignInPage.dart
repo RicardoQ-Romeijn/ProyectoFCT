@@ -85,7 +85,7 @@ class _SignInWidgetState extends State<SignInWidget> {
           RichText(
             text: TextSpan(
               style: TextStyle(color: Colors.black, fontSize: 20),
-              text: 'Continue without loging in? ',
+              text: 'Sign In Anonymously? ',
               children: [
                 TextSpan(
                   text: 'Continue',
