@@ -2,8 +2,8 @@
 
 import 'package:flutter_application/Models/Collections.dart';
 
-class User {
-  User(
+class Users {
+  Users(
     this.displayName,
     this.email,
     this.collections,

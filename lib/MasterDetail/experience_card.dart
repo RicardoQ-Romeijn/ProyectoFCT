@@ -83,8 +83,8 @@ class InnerExperience extends StatelessWidget {
                 children: [
                   niceText(experience.title),
                   niceText(experience.description),
-                  niceText(experience.location),
-                  niceText(experience.date),
+                  niceText(experience.location.toString()),
+                  niceText(experience.date.toString()),
                 ],
               ),
               Positioned(

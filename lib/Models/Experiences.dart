@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Experiences {
   Experiences(
     this.id,
@@ -14,6 +16,6 @@ class Experiences {
   String image;
   String title;
   String description;
-  String location;
-  String date;
+  GeoPoint location;
+  Timestamp date;
 }
