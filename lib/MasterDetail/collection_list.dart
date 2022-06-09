@@ -1,18 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application/MasterDetail/experience_list.dart';
 import 'package:flutter_application/Models/Collections.dart';
-import 'package:flutter_application/Models/Experiences.dart';
-import 'package:flutter_application/Models/Users.dart';
-import 'dart:convert';
 
 import 'package:uuid/uuid.dart';
 
@@ -131,27 +123,74 @@ class _CollectionListState extends State<CollectionList> {
                                     Object exception, StackTrace? stackTrace) {
                                   return const Icon(
                                     Icons.error,
-                                    color: Color.fromRGBO(0, 0, 0, .3),
+                                    color: Color.fromRGBO(177, 177, 177, .5),
                                     size: 100,
                                   );
                                 },
                               ),
                             ),
                           ),
-                          //   Expanded(
-                          //     child: Container(
-                          //       decoration: BoxDecoration(
-                          //         image: DecorationImage(
-                          //           fit: BoxFit.cover,
-                          //           image: NetworkImage(collections[index].image),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
                           Text(collections[index].title)
                         ],
                       ),
                     ),
+                    onLongPress: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              scrollable: false,
+                              title: Text('Confirmation'),
+                              content: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                      'You sure you want to delete ${collections[index].title}?')),
+                              actions: [
+                                ElevatedButton(
+                                  child: Text("Delete"),
+                                  onPressed: () {
+                                    Map<String, dynamic> collts = {};
+                                    Map<String, dynamic> colltsCopy = {};
+                                    Map<String, dynamic>? allData = {};
+
+                                    var doc = FirebaseFirestore.instance
+                                        .collection('users')
+                                        .doc(user.uid);
+
+                                    doc.get().then((value) => {
+                                          collts = value.get('collections'),
+                                          colltsCopy = value.get('collections'),
+                                          for (dynamic element
+                                              in colltsCopy.keys)
+                                            {
+                                              if (element ==
+                                                  collections[index].uuid)
+                                                {
+                                                  collts.remove(element),
+                                                }
+                                            },
+                                          doc.get().then((value) => {
+                                                allData = value.data(),
+                                                allData!['collections'] =
+                                                    collts,
+                                                doc.update(allData!).then(
+                                                    (value) => {
+                                                          print(
+                                                              "DocumentSnapshot successfully updated!"),
+                                                          setState(() {}),
+                                                          Navigator.pop(
+                                                              context, true)
+                                                        },
+                                                    onError: (e) => print(
+                                                        "Error updating document $e"))
+                                              }),
+                                        });
+                                  },
+                                )
+                              ],
+                            );
+                          });
+                    },
                   );
                 },
               ),
@@ -206,10 +245,11 @@ class _CollectionListState extends State<CollectionList> {
                                   .doc(user.uid)
                                   .get()
                                   .then((value) => {
-                                        col = value.get('collections'),
-                                        col.addAll({
-                                          '${col.length}': newCol.convertObj()
-                                        }),
+                                        // print(value.data()),
+                                        col = value.data()!.putIfAbsent(
+                                            'collections', () => {null}),
+                                        col.addAll(
+                                            {Uuid().v4(): newCol.convertObj()}),
                                         FirebaseFirestore.instance
                                             .collection('users')
                                             .doc(user.uid)
