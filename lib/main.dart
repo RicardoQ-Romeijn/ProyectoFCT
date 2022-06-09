@@ -20,19 +20,26 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static final ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(ThemeMode.light);
+
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Experience',
-      scaffoldMessengerKey: Utils.messengerKey,
-      navigatorKey: navigatorKey,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(),
-    );
+    return ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeNotifier,
+        builder: (_, ThemeMode currentMode, __) {
+          return MaterialApp(
+            title: 'Experience',
+            scaffoldMessengerKey: Utils.messengerKey,
+            navigatorKey: navigatorKey,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(primarySwatch: Colors.teal),
+            darkTheme: ThemeData.dark(),
+            themeMode: currentMode,
+            home: LoginPage(),
+          );
+        });
   }
 }

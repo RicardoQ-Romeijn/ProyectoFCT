@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application/Models/Experiences.dart';
 import 'package:folding_cell/folding_cell/widget.dart';
+import 'package:intl/intl.dart';
 
 class FrontExperience extends StatelessWidget {
   final String image;
@@ -17,16 +18,24 @@ class FrontExperience extends StatelessWidget {
           alignment: Alignment.center,
           child: Stack(
             children: <Widget>[
-              Image.network(
-                image,
-                errorBuilder: (BuildContext context, Object exception,
-                    StackTrace? stackTrace) {
-                  return const Icon(
-                    Icons.error,
-                    color: Color.fromRGBO(0, 0, 0, .3),
-                    size: 100,
-                  );
-                },
+              Positioned(
+                right: 0,
+                left: 0,
+                top: 0,
+                bottom: 0,
+                child: Image.network(
+                  image,
+                  alignment: Alignment.bottomCenter,
+                  fit: BoxFit.fitWidth,
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return const Icon(
+                      Icons.error,
+                      color: Color.fromRGBO(0, 0, 0, .3),
+                      size: 100,
+                    );
+                  },
+                ),
               ),
               Positioned(
                 right: 10,
@@ -70,28 +79,48 @@ class InnerExperience extends StatelessWidget {
           color: Color(0xFFecf2f9),
           child: Stack(
             children: [
-              Align(
-                alignment: Alignment.center,
-                child: Image.network(
-                  experience.image,
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
-                    return const Icon(
-                      Icons.error,
-                      color: Color.fromRGBO(0, 0, 0, .3),
-                      size: 100,
-                    );
-                  },
+              Positioned(
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Image.network(
+                        experience.image,
+                        fit: BoxFit.fitHeight,
+                        width: MediaQuery.of(context).size.width / 2,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return const Icon(
+                            Icons.error,
+                            color: Color.fromRGBO(0, 0, 0, .3),
+                            size: 100,
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          niceText(experience.title),
+                          niceText(experience.description),
+                          //   Text(
+                          //       '${experience.location.latitude.toString()}, ${experience.location.longitude.toString()}'),
+                          niceText(DateFormat('yyyy-MM-dd').format(
+                              DateTime.fromMicrosecondsSinceEpoch(
+                                  experience.date.microsecondsSinceEpoch))),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  niceText(experience.title),
-                  niceText(experience.description),
-                  niceText(experience.location.toString()),
-                  niceText(experience.date.toString()),
-                ],
               ),
               Positioned(
                 right: 10,
@@ -125,13 +154,13 @@ class InnerExperience extends StatelessWidget {
   niceText(String text) {
     return Text(
       text,
+      textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.black,
         fontSize: 16,
         decorationColor: Colors.transparent,
         decorationStyle: TextDecorationStyle.solid,
         decorationThickness: 0,
-        backgroundColor: Colors.white,
       ),
     );
   }

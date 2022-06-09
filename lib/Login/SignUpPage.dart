@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -101,13 +102,27 @@ class _LoginWidgetState extends State<SignUpWidget> {
 
   Future signUp() async {
     final isValid = formKey.currentState!.validate();
+    Map<String, dynamic> newUser;
     if (!isValid) return;
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+          )
+          .then((value) => {
+                newUser = {
+                  'darkMode': false,
+                  'displayName': value.user!.displayName,
+                  'email': value.user!.email,
+                  'collections': {}
+                },
+                FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(value.user!.uid)
+                    .set(newUser),
+              });
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
         print(e);

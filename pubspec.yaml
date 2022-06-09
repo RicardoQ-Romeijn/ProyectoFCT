@@ -46,6 +46,9 @@ dependencies:
   uuid: ^3.0.6
   geolocator: ^8.2.1
   geocoding: ^2.0.4
+  location: ^4.4.0
+  shared_preferences: ^2.0.15
+  provider: ^6.0.3
 
 dev_dependencies:
   flutter_test:

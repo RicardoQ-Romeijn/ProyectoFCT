@@ -12,8 +12,6 @@ import 'package:flutter_application/Utils.dart';
 import 'package:folding_cell/folding_cell/widget.dart';
 import 'package:uuid/uuid.dart';
 
-final user = FirebaseAuth.instance.currentUser!;
-
 class ExperienceList extends StatefulWidget {
   final Map<String, Experiences> experiences;
   final String collectionName;
@@ -128,6 +126,7 @@ class _ExperienceListState extends State<ExperienceList> {
                             Map<String, dynamic>? exprs = {};
                             Map<String, dynamic>? allData = {};
 
+                            final user = FirebaseAuth.instance.currentUser!;
                             var doc = FirebaseFirestore.instance
                                 .collection('users')
                                 .doc(user.uid);
