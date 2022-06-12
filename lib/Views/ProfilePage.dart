@@ -49,11 +49,7 @@ _email() {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Email',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.0,
-                  color: Colors.grey)),
+          Text('Email', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15.0, color: Colors.grey)),
           SizedBox(height: 1),
           Text(email)
         ],
@@ -72,11 +68,7 @@ _mobile() {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Mobile',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.0,
-                  color: Colors.grey)),
+          Text('Mobile', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15.0, color: Colors.grey)),
           SizedBox(height: 1),
           Text(phone)
         ],
@@ -95,11 +87,7 @@ _displayName() {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('Display Name',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.0,
-                  color: Colors.grey)),
+          Text('Display Name', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15.0, color: Colors.grey)),
           SizedBox(height: 1),
           Text(displayName)
         ],
@@ -115,8 +103,7 @@ _picture() {
     padding: const EdgeInsets.all(12.0),
     child: Image.network(
       photoURL,
-      errorBuilder:
-          (BuildContext context, Object exception, StackTrace? stackTrace) {
+      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
         return const Icon(
           Icons.person,
           color: Color.fromRGBO(177, 177, 177, .5),

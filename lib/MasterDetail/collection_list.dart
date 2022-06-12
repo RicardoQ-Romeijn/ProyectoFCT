@@ -119,8 +119,7 @@ class _CollectionListState extends State<CollectionList> {
                             child: Center(
                               child: Image.network(
                                 collections[index].image,
-                                errorBuilder: (BuildContext context,
-                                    Object exception, StackTrace? stackTrace) {
+                                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                                   return const Icon(
                                     Icons.error,
                                     color: Color.fromRGBO(177, 177, 177, .5),
@@ -142,9 +141,7 @@ class _CollectionListState extends State<CollectionList> {
                               scrollable: false,
                               title: Text('Confirmation'),
                               content: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      'You sure you want to delete ${collections[index].title}?')),
+                                  padding: const EdgeInsets.all(8.0), child: Text('You sure you want to delete ${collections[index].title}?')),
                               actions: [
                                 ElevatedButton(
                                   child: Text("Delete"),
@@ -153,36 +150,28 @@ class _CollectionListState extends State<CollectionList> {
                                     Map<String, dynamic> colltsCopy = {};
                                     Map<String, dynamic>? allData = {};
 
-                                    var doc = FirebaseFirestore.instance
-                                        .collection('users')
-                                        .doc(user.uid);
+                                    var doc = FirebaseFirestore.instance.collection('users').doc(user.uid);
 
                                     doc.get().then((value) => {
                                           collts = value.get('collections'),
                                           colltsCopy = value.get('collections'),
-                                          for (dynamic element
-                                              in colltsCopy.keys)
+                                          for (dynamic element in colltsCopy.keys)
                                             {
-                                              if (element ==
-                                                  collections[index].uuid)
+                                              if (element == collections[index].uuid)
                                                 {
                                                   collts.remove(element),
                                                 }
                                             },
                                           doc.get().then((value) => {
                                                 allData = value.data(),
-                                                allData!['collections'] =
-                                                    collts,
+                                                allData!['collections'] = collts,
                                                 doc.update(allData!).then(
                                                     (value) => {
-                                                          print(
-                                                              "DocumentSnapshot successfully updated!"),
+                                                          print("DocumentSnapshot successfully updated!"),
                                                           setState(() {}),
-                                                          Navigator.pop(
-                                                              context, true)
+                                                          Navigator.pop(context, true)
                                                         },
-                                                    onError: (e) => print(
-                                                        "Error updating document $e"))
+                                                    onError: (e) => print("Error updating document $e"))
                                               }),
                                         });
                                   },
@@ -240,30 +229,14 @@ class _CollectionListState extends State<CollectionList> {
 
                               Map<String, dynamic> col;
 
-                              FirebaseFirestore.instance
-                                  .collection('users')
-                                  .doc(user.uid)
-                                  .get()
-                                  .then((value) => {
-                                        // print(value.data()),
-                                        col = value.data()!.putIfAbsent(
-                                            'collections', () => {null}),
-                                        col.addAll(
-                                            {Uuid().v4(): newCol.convertObj()}),
-                                        FirebaseFirestore.instance
-                                            .collection('users')
-                                            .doc(user.uid)
-                                            .update({'collections': col}).then(
-                                                (value) => {
-                                                      print(
-                                                          "DocumentSnapshot successfully updated!"),
-                                                      setState(() {}),
-                                                      Navigator.pop(
-                                                          context, true)
-                                                    },
-                                                onError: (e) => print(
-                                                    "Error updating document $e")),
-                                      });
+                              FirebaseFirestore.instance.collection('users').doc(user.uid).get().then((value) => {
+                                    // print(value.data()),
+                                    col = value.data()!.putIfAbsent('collections', () => {null}),
+                                    col.addAll({Uuid().v4(): newCol.convertObj()}),
+                                    FirebaseFirestore.instance.collection('users').doc(user.uid).update({'collections': col}).then(
+                                        (value) => {print("DocumentSnapshot successfully updated!"), setState(() {}), Navigator.pop(context, true)},
+                                        onError: (e) => print("Error updating document $e")),
+                                  });
                             },
                           )
                         ],

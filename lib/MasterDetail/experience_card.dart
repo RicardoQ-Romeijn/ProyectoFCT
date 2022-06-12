@@ -1,13 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application/Models/Experiences.dart';
 import 'package:folding_cell/folding_cell/widget.dart';
 import 'package:intl/intl.dart';
 
 class FrontExperience extends StatelessWidget {
-  final String image;
-  const FrontExperience({Key? key, required this.image}) : super(key: key);
+  final Experiences experience;
+  const FrontExperience({Key? key, required this.experience}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +26,10 @@ class FrontExperience extends StatelessWidget {
                 top: 0,
                 bottom: 0,
                 child: Image.network(
-                  image,
+                  experience.image,
                   alignment: Alignment.bottomCenter,
                   fit: BoxFit.fitWidth,
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                     return const Icon(
                       Icons.error,
                       color: Color.fromRGBO(0, 0, 0, .3),
@@ -42,8 +43,7 @@ class FrontExperience extends StatelessWidget {
                 bottom: 10,
                 child: TextButton(
                   onPressed: () {
-                    final foldingCellState = context
-                        .findAncestorStateOfType<SimpleFoldingCellState>();
+                    final foldingCellState = context.findAncestorStateOfType<SimpleFoldingCellState>();
                     foldingCellState?.toggleFold();
                   },
                   child: Text(
@@ -95,8 +95,7 @@ class InnerExperience extends StatelessWidget {
                         experience.image,
                         fit: BoxFit.fitHeight,
                         width: MediaQuery.of(context).size.width / 2,
-                        errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
+                        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                           return const Icon(
                             Icons.error,
                             color: Color.fromRGBO(0, 0, 0, .3),
@@ -113,9 +112,7 @@ class InnerExperience extends StatelessWidget {
                           niceText(experience.description),
                           //   Text(
                           //       '${experience.location.latitude.toString()}, ${experience.location.longitude.toString()}'),
-                          niceText(DateFormat('yyyy-MM-dd').format(
-                              DateTime.fromMicrosecondsSinceEpoch(
-                                  experience.date.microsecondsSinceEpoch))),
+                          niceText(DateFormat('yyyy-MM-dd').format(DateTime.fromMicrosecondsSinceEpoch(experience.date.microsecondsSinceEpoch))),
                         ],
                       ),
                     ),
@@ -127,8 +124,7 @@ class InnerExperience extends StatelessWidget {
                 bottom: 10,
                 child: TextButton(
                   onPressed: () {
-                    final foldingCellState = context
-                        .findAncestorStateOfType<SimpleFoldingCellState>();
+                    final foldingCellState = context.findAncestorStateOfType<SimpleFoldingCellState>();
                     foldingCellState?.toggleFold();
                   },
                   child: Text(

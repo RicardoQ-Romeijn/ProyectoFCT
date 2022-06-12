@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -18,19 +17,6 @@ class Utils {
     messengerKey.currentState!
       ..removeCurrentSnackBar()
       ..showSnackBar(snackBar);
-  }
-
-  static loadImage(String url) {
-    String imageUrl = url;
-    // https://github.com/flutter/flutter/issues/41563
-    // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(
-      imageUrl,
-      (int _) => ImageElement()..src = imageUrl,
-    );
-    return HtmlElementView(
-      viewType: imageUrl,
-    );
   }
 
   static Future<Position> getGeoLocationPosition() async {
@@ -54,12 +40,10 @@ class Utils {
     }
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      return Future.error('Location permissions are permanently denied, we cannot request permissions.');
     }
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
   }
 }

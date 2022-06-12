@@ -49,10 +49,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(labelText: 'Email'),
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (email) =>
-                  email != null && !EmailValidator.validate(email)
-                      ? 'Enter a valid email'
-                      : null,
+              validator: (email) => email != null && !EmailValidator.validate(email) ? 'Enter a valid email' : null,
             ),
             SizedBox(height: 4),
             TextFormField(
@@ -61,9 +58,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
               decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => value != null && value.length < 6
-                  ? 'Enter min. 6 characters'
-                  : null,
+              validator: (value) => value != null && value.length < 6 ? 'Enter min. 6 characters' : null,
             ),
             SizedBox(height: 20),
             ElevatedButton.icon(
@@ -85,11 +80,8 @@ class _LoginWidgetState extends State<SignUpWidget> {
                 children: [
                   TextSpan(
                     text: 'Sign In',
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = widget.onClickedSignUp,
-                    style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Theme.of(context).colorScheme.secondary),
+                    recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
+                    style: TextStyle(decoration: TextDecoration.underline, color: Theme.of(context).colorScheme.secondary),
                   ),
                 ],
               ),
@@ -112,16 +104,8 @@ class _LoginWidgetState extends State<SignUpWidget> {
             password: passwordController.text.trim(),
           )
           .then((value) => {
-                newUser = {
-                  'darkMode': false,
-                  'displayName': value.user!.displayName,
-                  'email': value.user!.email,
-                  'collections': {}
-                },
-                FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(value.user!.uid)
-                    .set(newUser),
+                newUser = {'darkMode': false, 'displayName': value.user!.displayName, 'email': value.user!.email, 'collections': {}},
+                FirebaseFirestore.instance.collection('users').doc(value.user!.uid).set(newUser),
               });
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {

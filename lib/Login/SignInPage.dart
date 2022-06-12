@@ -72,11 +72,8 @@ class _SignInWidgetState extends State<SignInWidget> {
               children: [
                 TextSpan(
                   text: 'Sign Up',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = widget.onClickedSignIn,
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Theme.of(context).colorScheme.secondary),
+                  recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignIn,
+                  style: TextStyle(decoration: TextDecoration.underline, color: Theme.of(context).colorScheme.secondary),
                 ),
               ],
             ),
@@ -89,11 +86,8 @@ class _SignInWidgetState extends State<SignInWidget> {
               children: [
                 TextSpan(
                   text: 'Continue',
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => FirebaseAuth.instance.signInAnonymously(),
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Theme.of(context).colorScheme.secondary),
+                  recognizer: TapGestureRecognizer()..onTap = () => FirebaseAuth.instance.signInAnonymously(),
+                  style: TextStyle(decoration: TextDecoration.underline, color: Theme.of(context).colorScheme.secondary),
                 ),
               ],
             ),
