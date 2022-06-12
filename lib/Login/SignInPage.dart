@@ -20,8 +20,8 @@ class SignInWidget extends StatefulWidget {
 }
 
 class _SignInWidgetState extends State<SignInWidget> {
-  final emailController = TextEditingController(text: 'admin@experience.com');
-  final passwordController = TextEditingController(text: 'administrador');
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void dispose() {

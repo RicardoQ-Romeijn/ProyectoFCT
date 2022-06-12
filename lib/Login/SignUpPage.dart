@@ -22,8 +22,8 @@ class SignUpWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<SignUpWidget> {
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController(text: 'admin@experience.com');
-  final passwordController = TextEditingController(text: 'administrador');
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void dispose() {
