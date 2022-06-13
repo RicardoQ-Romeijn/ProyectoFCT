@@ -8,48 +8,6 @@ import 'package:flutter_application/Models/Collections.dart';
 
 import 'package:uuid/uuid.dart';
 
-// final List<Experiences> _experiences = [
-//   Experiences(
-//       '1',
-//       'https://www.schengenvisainfo.com/news/wp-content/uploads/2020/06/Amsterdam-Netherlands.jpg',
-//       'Water Canal',
-//       'Canal with nice trees and boats',
-//       '52.3740300, 4.8896900',
-//       "22/04/2022"),
-//   Experiences(
-//       '2',
-//       'http://theimmigrationoffice.com/wp-content/uploads/2015/08/Sidney.jpg',
-//       'Australia',
-//       'Australian Description',
-//       '-25.274398, 133.775136',
-//       "22/04/2022"),
-//   Experiences(
-//       '3',
-//       'https://www.simplemost.com/wp-content/uploads/2020/01/AdobeStock_243835834.jpeg',
-//       'Bridge',
-//       'Nice bridge with a beautiful church in background',
-//       'Rotterdam',
-//       "22/04/2022")
-// ];
-
-// final List<Collections> _items = [
-//   Collections(
-//       '1',
-//       'https://www.netherlands-tourism.com/wp-content/uploads/2013/07/Flag-of-The-Netherlands3.png',
-//       'Holland',
-//       _experiences),
-//   Collections(
-//       '2',
-//       'https://m.media-amazon.com/images/I/71VC1i3mFrL._AC_SX679_.jpg',
-//       'Australia',
-//       _experiences),
-//   Collections(
-//       '3',
-//       'https://cdn11.bigcommerce.com/s-2lbnjvmw4d/images/stencil/1280x1280/products/2852/5280/canadaflag__98669.1617275975.jpg',
-//       'Canada',
-//       _experiences)
-// ];
-
 var user = FirebaseAuth.instance.currentUser!;
 var snapshots = FirebaseFirestore.instance.collection('users').snapshots();
 
