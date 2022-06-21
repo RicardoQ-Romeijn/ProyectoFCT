@@ -2,11 +2,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/Login/LoginPage.dart';
+import 'package:Experience/Login/LoginPage.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_application/Utils.dart';
-import 'package:flutter_application/firebase_options.dart';
+import 'package:Experience/Utils.dart';
+import 'package:Experience/firebase_options.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 

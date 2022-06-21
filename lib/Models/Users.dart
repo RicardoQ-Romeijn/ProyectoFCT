@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:flutter_application/Models/Collections.dart';
+import 'package:Experience/Models/Collections.dart';
 
 class Users {
   Users(

@@ -2,9 +2,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/Views/CollectionPage.dart';
-import 'package:flutter_application/Views/ProfilePage.dart';
-import 'package:flutter_application/main.dart';
+import 'package:Experience/Views/CollectionPage.dart';
+import 'package:Experience/Views/ProfilePage.dart';
+import 'package:Experience/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {

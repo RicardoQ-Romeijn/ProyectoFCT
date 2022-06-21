@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_application/Models/Experiences.dart';
-import 'package:flutter_application/Utils.dart';
+import 'package:Experience/Models/Experiences.dart';
+import 'package:Experience/Utils.dart';
 import 'package:uuid/uuid.dart';
 
 class Collections {

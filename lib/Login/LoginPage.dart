@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/Login/AuthPage.dart';
-import 'package:flutter_application/Views/MainPage.dart';
+import 'package:Experience/Login/AuthPage.dart';
+import 'package:Experience/Views/MainPage.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

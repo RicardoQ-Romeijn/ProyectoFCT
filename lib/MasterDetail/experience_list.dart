@@ -3,11 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/MasterDetail/collection_list.dart';
-import 'package:flutter_application/MasterDetail/experience_card.dart';
-import 'package:flutter_application/Models/Collections.dart';
-import 'package:flutter_application/Models/Experiences.dart';
-import 'package:flutter_application/Utils.dart';
+import 'package:Experience/MasterDetail/collection_list.dart';
+import 'package:Experience/MasterDetail/experience_card.dart';
+import 'package:Experience/Models/Collections.dart';
+import 'package:Experience/Models/Experiences.dart';
+import 'package:Experience/Utils.dart';
 import 'package:folding_cell/folding_cell/widget.dart';
 import 'package:uuid/uuid.dart';
 

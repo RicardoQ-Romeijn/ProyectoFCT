@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/Models/Experiences.dart';
+import 'package:Experience/Models/Experiences.dart';
 import 'package:folding_cell/folding_cell/widget.dart';
 import 'package:intl/intl.dart';
 

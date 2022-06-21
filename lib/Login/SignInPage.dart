@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application/Utils.dart';
-import 'package:flutter_application/Views/MainPage.dart';
+import 'package:Experience/Utils.dart';
+import 'package:Experience/Views/MainPage.dart';
 
 class SignInWidget extends StatefulWidget {
   final VoidCallback onClickedSignIn;
@@ -38,7 +38,11 @@ class _SignInWidgetState extends State<SignInWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 40),
+          SizedBox(height: 20),
+          Icon(Icons.explicit_rounded, size: 200, shadows: const [
+            Shadow(offset: Offset(40, 40), blurRadius: 50, color: Color.fromARGB(255, 170, 170, 170)),
+          ]),
+          SizedBox(height: 20),
           TextField(
             controller: emailController,
             cursorColor: Colors.white,
